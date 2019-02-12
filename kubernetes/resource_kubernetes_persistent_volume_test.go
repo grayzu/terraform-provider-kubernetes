@@ -768,7 +768,7 @@ resource "aws_ebs_volume" "test" {
   availability_zone = "%s"
   size              = 10
 
-  tags {
+  tags = {
     Name = "%s"
   }
 }
@@ -815,7 +815,7 @@ resource "aws_ebs_volume" "test" {
   availability_zone = "%s"
   size              = 10
 
-  tags {
+  tags = {
     Name = "%s"
   }
 }
