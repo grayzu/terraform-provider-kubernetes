@@ -31,10 +31,10 @@ func TestAccKubernetesRoleBinding_basic(t *testing.T) {
 					resource.TestCheckResourceAttrSet("kubernetes_role_binding.test", "metadata.0.resource_version"),
 					resource.TestCheckResourceAttrSet("kubernetes_role_binding.test", "metadata.0.self_link"),
 					resource.TestCheckResourceAttrSet("kubernetes_role_binding.test", "metadata.0.uid"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.%", "3"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.api_group", "rbac.authorization.k8s.io"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.kind", "Role"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.name", "admin"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.#", "1"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.0.api_group", "rbac.authorization.k8s.io"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.0.kind", "Role"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.0.name", "admin"),
 					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "subject.#", "1"),
 					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "subject.0.api_group", "rbac.authorization.k8s.io"),
 					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "subject.0.name", "notauser"),
@@ -50,10 +50,10 @@ func TestAccKubernetesRoleBinding_basic(t *testing.T) {
 					resource.TestCheckResourceAttrSet("kubernetes_role_binding.test", "metadata.0.resource_version"),
 					resource.TestCheckResourceAttrSet("kubernetes_role_binding.test", "metadata.0.self_link"),
 					resource.TestCheckResourceAttrSet("kubernetes_role_binding.test", "metadata.0.uid"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.%", "3"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.api_group", "rbac.authorization.k8s.io"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.kind", "Role"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.name", "admin"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.#", "1"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.0.api_group", "rbac.authorization.k8s.io"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.0.kind", "Role"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.0.name", "admin"),
 					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "subject.#", "3"),
 					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "subject.0.api_group", "rbac.authorization.k8s.io"),
 					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "subject.0.name", "notauser"),
@@ -112,10 +112,10 @@ func TestAccKubernetesRoleBinding_sa_subject(t *testing.T) {
 					resource.TestCheckResourceAttrSet("kubernetes_role_binding.test", "metadata.0.resource_version"),
 					resource.TestCheckResourceAttrSet("kubernetes_role_binding.test", "metadata.0.self_link"),
 					resource.TestCheckResourceAttrSet("kubernetes_role_binding.test", "metadata.0.uid"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.%", "3"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.api_group", "rbac.authorization.k8s.io"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.kind", "Role"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.name", "admin"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.#", "1"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.0.api_group", "rbac.authorization.k8s.io"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.0.kind", "Role"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.0.name", "admin"),
 					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "subject.#", "1"),
 					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "subject.0.api_group", ""),
 					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "subject.0.name", "someservice"),
@@ -145,10 +145,10 @@ func TestAccKubernetesRoleBinding_group_subject(t *testing.T) {
 					resource.TestCheckResourceAttrSet("kubernetes_role_binding.test", "metadata.0.resource_version"),
 					resource.TestCheckResourceAttrSet("kubernetes_role_binding.test", "metadata.0.self_link"),
 					resource.TestCheckResourceAttrSet("kubernetes_role_binding.test", "metadata.0.uid"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.%", "3"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.api_group", "rbac.authorization.k8s.io"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.kind", "Role"),
-					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.name", "admin"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.#", "1"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.0.api_group", "rbac.authorization.k8s.io"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.0.kind", "Role"),
+					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "role_ref.0.name", "admin"),
 					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "subject.#", "1"),
 					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "subject.0.api_group", "rbac.authorization.k8s.io"),
 					resource.TestCheckResourceAttr("kubernetes_role_binding.test", "subject.0.name", "somegroup"),
@@ -214,7 +214,7 @@ resource "kubernetes_role_binding" "test" {
     name = "%s"
   }
 
-  role_ref = {
+  role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "Role"
     name      = "admin"
@@ -236,7 +236,7 @@ resource "kubernetes_role_binding" "test" {
     name = "%s"
   }
 
-  role_ref = {
+  role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "Role"
     name      = "admin"
